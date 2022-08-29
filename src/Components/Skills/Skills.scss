@@ -1,0 +1,52 @@
+i.skills-icon {
+    font-size: 4em;
+}
+
+.ui.grid>.row .icon-label-row {
+    padding-top: .5rem;
+}
+
+.ui.header.technical-skills-header {
+    color: #e6e6e6;
+}
+
+.ui.header.technical-skills-subheader {
+    color: #d6d6d6;
+}
+
+.ui.grid.skills-container {
+    padding-top: 15px;
+}
+
+.skills-icons-container {
+    margin-top: 15px;
+}
+
+.ui.grid.skills-icons-grid {
+    padding: 0 30px;
+}
+
+$skills-icon-color-0: #f5f5f5;
+$skills-icon-color-1: darken($skills-icon-color-0, 80%);
+$skills-icon-color-2: darken($skills-icon-color-1, 75);
+
+    .skills-icon-0 {
+        color: $skills-icon-color-0;
+        
+    }
+
+    .skills-icon-1 {
+        color: $skills-icon-color-1;
+    }
+
+    .skills-icon-2 {
+        color: $skills-icon-color-2;
+    }
+
+    div[class*=' skills-icon-'] {
+        transition: transform .2s;
+    }
+
+    div[class*=' skills-icon-']:hover {
+        transform: scale(1.45);
+    }

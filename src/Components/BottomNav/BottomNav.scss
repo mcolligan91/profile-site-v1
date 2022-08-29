@@ -1,0 +1,34 @@
+.ui.grid.bottom-nav-container {
+    background: #fff;
+}
+
+.email-link,
+.email-link:hover,
+.contact-link {
+    color: #000;
+}
+
+.email-link:hover {
+    font-weight: bold;
+}
+
+.contact-link-content:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.ui.grid>.row.contact-icons-row {
+    padding-top: 0;
+}
+
+.ui.list.contact-icons-list-container {
+    margin-top: .25em;
+}
+
+.contact-link {
+    font-size: 2.25em;
+}
+
+.ui.grid>.column:not(.row).scroll-up-botton-container {
+    padding-bottom: 4em;
+}

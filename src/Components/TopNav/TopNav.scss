@@ -1,0 +1,59 @@
+.ui.menu .inverted.item.top-nav-link {
+    color: rgba(255, 255, 255, .7);}
+
+.top-nav-link {
+    height: 100%;
+    text-align: center;
+}
+
+.ui.menu.top-nav {
+    height: 75px;
+    transition: margin 0.5s ease, background 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
+}
+
+.ui.menu.floating-nav {
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0px, 2px, 3px, rgba(0, 0, 0, .04)
+}
+
+.ui.menu.top-nav-mobile .top-nav-link {
+    padding: .5em;
+}
+
+.ui.inverted.menu.top-nav {
+    background-color: transparent;
+}
+
+.main-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+@media screen and (min-width: 795px) {
+    .main-logo-container {
+        margin-left: 15px;
+    }
+    .menu-item-container {
+        padding-left: 15px;
+    }
+}
+
+@media screen and (max-width: 795px) {
+    .top-nav-link:hover {
+        background: transparent !important;
+    }
+}
+
+.ui.menu.floating-nav .main-logo {
+    cursor: pointer;
+}
+
+.download-container {
+    margin-right: 15px;
+}
+
+.ui.menu:not(.vertical) .item>.button.resume-button {
+    font-size: .85em;
+}

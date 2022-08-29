@@ -1,0 +1,45 @@
+.ui.header.experience-header {
+    color: #757680;
+}
+
+.timeline-container {
+    padding-top: 3em;
+}
+
+.Timeline-line {
+    z-index: auto;
+    top: auto;
+}
+
+$timelineCurrentColor: #252525;
+$timelineCurrentShadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 $timelineCurrentColor, 0 3px 3px 0 #d4d4d5;
+
+$timelineMiddleColor: #757575;
+$timelineMiddleShadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 $timelineMiddleColor, 0 3px 3px 0 #d4d4d5;
+
+$timelineStartColor: #e1e1e1;
+$timelineStartShadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 $timelineStartColor, 0 3px 3px 0 #d4d4d5;
+
+    .timeline-present i.inverted.circular.icon {
+        background-color: $timelineCurrentColor !important;
+    }
+
+    .timeline-present .ui.grey.card {
+        box-shadow: $timelineCurrentShadow !important;
+    }
+
+    .timeline-middle i.inverted.circular.icon {
+        background-color: $timelineMiddleColor !important;
+    }
+
+    .timeline-middle .ui.grey.card {
+        box-shadow: $timelineMiddleShadow !important;
+    }
+
+    .timeline-start i.inverted.circular.icon {
+        background-color: $timelineStartColor !important;
+    }
+
+    .timeline-start .ui.grey.card {
+        box-shadow: $timelineStartShadow !important;
+    }
