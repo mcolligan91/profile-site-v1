@@ -1,3 +1,9 @@
+Profile Site - single-page web app built using React and Semantic-UI-React
+
+
+![screen shot](https://github.com/mcolligan91/profile-site/blob/master/Screen%20Shot.png)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
