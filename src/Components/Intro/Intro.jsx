@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Header, Button, Icon } from 'semantic-ui-react';
 import { Bounce } from 'react-reveal';
 
+import TopNav from '../TopNav/TopNav';
+
 import './Intro.scss';
 
-class Intro extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
+const Intro = (props) => {
+	const {isInverted, isMobile, scrollToContent, scrollToTop} = props;
 
-    render() {
-        const {isMobile, scrollToContent} = this.props;
+	let introHeaders = [
+		{ 
+			divType: !isMobile ? 'h1' : 'h3', 
+			headerClass: null,
+			spanClass: 'intro-main-text', 
+			text: 'Michael Colligan' 
+		},
+		{ 
+			divType: 'h3', 
+			headerClass: 'sub-header-container',
+			spanClass: `intro-sub-text${isMobile ? '-mobile' : ''}`, 
+			text: 'Full-Stack Software Engineer' 
+		},
+	];
 
-        let introHeaders = [
-			{ 
-				divType: !isMobile ? 'h1' : 'h3', 
-				spanClass: 'intro-main-text', 
-				text: 'Michael Colligan' 
-			},
-			{ 
-				divType: 'h3', 
-				spanClass: 'intro-sub-text', 
-				text: 'Full-Stack Software Engineer' 
-			},
-		];
-
-        return (
+	return (
+		<>
+			<TopNav isInverted={isInverted} isMobile={isMobile} scrollToTop={scrollToTop} scrollToContent={scrollToContent} />
 			<Container className='intro-container' text textAlign='center'>
 				{introHeaders.map((header, i) => {
-					const {divType, spanClass, text} = header;
+					const {divType, headerClass, spanClass, text} = header;
 					return (
-						<Header key={i} as={divType}>
+						<Header key={i} as={divType} className={headerClass}>
 							<span className={spanClass}>{text}</span>
 						</Header>
 					);
@@ -42,8 +42,8 @@ class Intro extends Component {
 					</Button>
 				</Bounce>
 			</Container>
-        );
-    }
+		</>
+	);
 }
 
 export default Intro;

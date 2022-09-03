@@ -1,3 +1,5 @@
+@import '../index.scss';
+
 .ui.header.education-header {
     color: rgba(255, 255, 255, 0.9);
 }
@@ -7,14 +9,12 @@
 }
 
 .ui.segment.invisible-segment {
-    background: transparent;
-    border: none;
-    box-shadow: none;
+    @extend %invisible-segment;
 }
 
 .education-subheader.ui.header,
 .ui.header.header-label {
-    color: #777777;
+    color: #929292;
 }
 
 .ui.header.education-subheader {
@@ -24,7 +24,6 @@
 .ui.header.header-label {
     margin-top: 0.25em;
 }
-
 
 .sub-header-highlighted {
     color: #c7c7c7;
@@ -36,4 +35,13 @@
 
 .honors-text {
     font-size: 1.5rem;
+}
+
+.education-row-inverted .sub-header-highlighted {
+    color: $main-orange-light;
+}
+
+.education-row-inverted .education-subheader.ui.header,
+.education-row-inverted .ui.header.header-label {
+    color: #f7f7f7;
 }

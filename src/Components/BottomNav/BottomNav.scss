@@ -1,6 +1,4 @@
-.ui.grid.bottom-nav-container {
-    background: #fff;
-}
+@import '../index.scss';
 
 .email-link,
 .email-link:hover,
@@ -31,4 +29,17 @@
 
 .ui.grid>.column:not(.row).scroll-up-botton-container {
     padding-bottom: 4em;
+}
+
+.bottom-nav-container-inverted .ui.header.footer-header {
+    color: $main-blue-dark;
+}
+
+.bottom-nav-container-inverted .contact-link {
+    color: $main-orange-dark;
+}
+
+.bottom-nav-container-inverted .email-link,
+.bottom-nav-container-inverted .copyright-text {
+    color: $main-blue-light;
 }

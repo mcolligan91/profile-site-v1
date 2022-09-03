@@ -1,9 +1,12 @@
+@import '../index.scss';
+
 .intro-container {
     height: 100vh;
     min-height: 700;
-    padding: 15rem 0
+    padding: 15rem 0;
+    margin-top: 30px;
 }
-
+ 
 .intro-main-text {
     font-size: 2.5em;
     color: rgba(255, 255, 255, .9);
@@ -11,9 +14,26 @@
 
 .intro-sub-text {
     font-size: 1.5em;
+}
+
+.intro-sub-text-mobile {
+    font-size: 1.25em;
+}
+
+.intro-sub-text,
+.intro-sub-text-mobile {
     color: rgb(150, 150, 150);
 }
 
 .ui.button.explore-button {
     margin-top: 30px;
+}
+
+.intro-main-container-inverted .intro-sub-text {
+    color: $main-orange-dark;
+}
+
+.intro-main-container-inverted .ui.inverted.button:hover,
+.intro-main-container-inverted .ui.inverted.button:focus {
+    color: $main-blue-dark;
 }

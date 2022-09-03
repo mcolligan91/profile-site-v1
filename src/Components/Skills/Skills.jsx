@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
-import { Container, Grid, Header } from 'semantic-ui-react';
+import React from 'react';
+import { Container, Grid, Header, Segment } from 'semantic-ui-react';
 import { Flip } from 'react-reveal';
 
 import './Skills.scss';
 
-class Skills extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
+const Skills = (props) => {
+	const {isInverted, isMobile} = props;
 
-    createSkillsIconList = () => {		
+    const createSkillsIconList = () => {		
 		let cols = [
 			{icon: 'javascript-plain', text: 'JavaScript'},
 			{icon: 'html5-plain', text: 'HTML5'},
@@ -34,8 +31,8 @@ class Skills extends Component {
 			{icon: 'bitbucket-original', text: 'Bitbucket'},
 			{icon: 'github-original', text: 'GitHub'},
 			{icon: 'sourcetree-original', text: 'Sourcetree'},
-			{icon: 'xd-plain', text: 'Adobe XD'},
-			{icon: 'photoshop-plain', text: 'Adobe Photoshop'}
+			{icon: 'xd-plain', text: 'XD'},
+			{icon: 'photoshop-plain', text: 'Photoshop'}
 		];
 
 		let group = 0;
@@ -47,16 +44,14 @@ class Skills extends Component {
 		return cols;
 	}
 
-    render() {
-        const {isMobile} = this.props;
+	const skillsSubHeader = (
+		<Header as='h2' className='technical-skills-subheader' content='Languages, Frameworks & Libraries, Other Software Proficiencies' />
+	);
 
-        const skillsSubHeader = (
-            <Header as='h2' className='technical-skills-subheader' content='Languages, Frameworks & Libraries, Other Software Proficiencies' />
-        );
+	let skillsColumns = createSkillsIconList();
 
-        let skillsColumns = this.createSkillsIconList();
-
-		const skillsIconGridContent = (
+	const skillsIconsSegmentContent = (
+		<Segment className={isMobile ? 'skills-segment-mobile' : `skills-segment${isInverted ? '-inverted' : ''}`} padded='very'>
 			<Grid className='skills-icons-grid'>
 				{skillsColumns.map((col, i) => {
 					const {group, icon, text} = col;
@@ -75,29 +70,29 @@ class Skills extends Component {
 					)
 				})}
 			</Grid>
-		);
+		</Segment>
+	);
 
-        let skillsGridColumns = [
-            {colClass: null, content: skillsSubHeader},
-            {colClass: 'skills-icons-container', content: skillsIconGridContent}
-        ];
+	let skillsGridColumns = [
+		{colClass: null, content: skillsSubHeader},
+		{colClass: 'skills-icons-container', content: skillsIconsSegmentContent}
+	];
 
-        return (
-			<Container textAlign='center'>
-				<Header as='h1' className='technical-skills-header'>Technical Skills</Header>
-				<Grid className='skills-container' verticalAlign='middle' textAlign='center'>
-                    {skillsGridColumns.map((col, i) => {
-                        const {colClass, content} = col;
-                        return (
-                            <Grid.Column key={i} className={colClass} width={16}>
-                                {content}
-                            </Grid.Column>
-                        )
-                    })}
-				</Grid>
-			</Container>
-        );
-    }
+	return (
+		<Container textAlign='center'>
+			<Header as='h1' className='technical-skills-header'>Technical Skills</Header>
+			<Grid className='skills-container' verticalAlign='middle' textAlign='center'>
+				{skillsGridColumns.map((col, i) => {
+					const {colClass, content} = col;
+					return (
+						<Grid.Column key={i} className={colClass} width={16}>
+							{content}
+						</Grid.Column>
+					)
+				})}
+			</Grid>
+		</Container>
+	);
 }
 
 export default Skills;

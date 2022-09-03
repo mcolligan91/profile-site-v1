@@ -1,9 +1,29 @@
-.ui.menu .inverted.item.top-nav-link {
-    color: rgba(255, 255, 255, .7);}
+@import '../index.scss';
 
 .top-nav-link {
     height: 100%;
     text-align: center;
+}
+
+.ui.menu.floating-nav .main-logo {
+    color: #000;
+    cursor: pointer;
+}
+
+.ui.menu.floating-nav .main-logo-inverted {
+    color: $main-blue-dark;
+}
+
+.main-logo {
+    color: #fff;
+    font-size: 4rem;
+    font-family: auto;
+    font-weight: bold;
+}
+
+.ui.inverted.menu a.top-nav-link.item:hover,
+.ui.menu a.top-nav-link.item:hover {
+    background: transparent;
 }
 
 .ui.menu.top-nav {
@@ -21,7 +41,7 @@
 }
 
 .ui.inverted.menu.top-nav {
-    background-color: transparent;
+    background: transparent;
 }
 
 .main-logo-container {
@@ -35,8 +55,46 @@
     .main-logo-container {
         margin-left: 15px;
     }
-    .menu-item-container {
-        padding-left: 15px;
+
+    .top-nav-link-text {
+        display: block;
+        position: relative;
+        padding: .45em 0;
+    }
+    
+    .top-nav-link-text::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0.15em;
+        background-color: #fff;
+        opacity: 0;
+        transition: opacity .3s, transform .3s;
+    }
+
+    .top-nav-link-text:hover::after,
+    .top-nav-link-text:focus::after {
+        opacity: 1;
+        transform: translate3d(0, 0.25em, 0);
+    }
+
+    .top-nav-link-text::after {
+        opacity: 1;
+        transform: scale(0);
+        transform-origin: center;
+    }
+
+    .top-nav-link-text:hover::after,
+    .top-nav-link-text:focus::after{
+        transform: scale(1);
+    }
+
+    .top-nav-link-text:hover {
+        cursor: pointer;
+        transform: scale(1.15);
+        transition: transform .4s ease;
     }
 }
 
@@ -46,14 +104,22 @@
     }
 }
 
-.ui.menu.floating-nav .main-logo {
-    cursor: pointer;
-}
-
 .download-container {
     margin-right: 15px;
 }
 
 .ui.menu:not(.vertical) .item>.button.resume-button {
     font-size: .85em;
+}
+
+.intro-main-container-inverted .ui.menu.floating-nav .item .top-nav-link-text {
+    color: $main-blue-dark;
+}
+
+.ui.menu.floating-nav .top-nav-link-text::after {
+    background-color: #000;
+}
+
+.intro-main-container-inverted .ui.menu.floating-nav .top-nav-link-text::after {
+    background-color: $main-blue-dark;
 }

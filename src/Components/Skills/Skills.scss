@@ -1,3 +1,5 @@
+@import '../index.scss';
+
 i.skills-icon {
     font-size: 4em;
 }
@@ -10,20 +12,33 @@ i.skills-icon {
     color: #e6e6e6;
 }
 
+.skills-row-inverted .ui.header.technical-skills-header {
+    color: $main-blue-dark;
+}
+
+.ui.segment.skills-segment-inverted {
+    background: #f7f7f7;
+}
+
+.ui.segment.skills-segment-mobile,
+.ui.segment.skills-segment {
+    @extend %invisible-segment;
+}
+
+.ui[class*="very padded"].segment.skills-segment-mobile {
+    padding: 1em 0 0 0;
+}
+
 .ui.header.technical-skills-subheader {
     color: #d6d6d6;
 }
 
+.skills-row-inverted .ui.header.technical-skills-subheader {
+    color: $main-orange-dark;
+}
+
 .ui.grid.skills-container {
     padding-top: 15px;
-}
-
-.skills-icons-container {
-    margin-top: 15px;
-}
-
-.ui.grid.skills-icons-grid {
-    padding: 0 30px;
 }
 
 $skills-icon-color-0: #f5f5f5;
@@ -41,6 +56,19 @@ $skills-icon-color-2: darken($skills-icon-color-1, 75);
 
     .skills-icon-2 {
         color: $skills-icon-color-2;
+    }
+
+    .skills-row-inverted .skills-icon-0 {
+        color: $main-blue-dark;
+        
+    }
+
+    .skills-row-inverted .skills-icon-1 {
+        color: $main-blue-light;
+    }
+
+    .skills-row-inverted .skills-icon-2 {
+        color: $main-orange-light;
     }
 
     div[class*=' skills-icon-'] {

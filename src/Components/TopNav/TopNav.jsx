@@ -37,13 +37,11 @@ class TopNav extends Component {
 
     render() {
         const {invertNav} = this.state,
-            {isMobile, scrollToTop, scrollToContent} = this.props;
-        
-        let logoImage = invertNav ? require('./logoInverted.png') : require('./logo.png');
+            {isInverted, isMobile, scrollToTop, scrollToContent} = this.props;
 
         const mainLogoContainer = (
             <div className='main-logo-container'>
-                <img src={logoImage} className='main-logo' height='40' alt='Logo' onClick={scrollToTop}></img>
+                <div className={`main-logo ${isInverted ? 'main-logo-inverted' : ''}`} onClick={scrollToTop}>MC</div>
             </div>
         );
 
@@ -59,7 +57,9 @@ class TopNav extends Component {
                     const {name, id, dur} = item;
                     return (
                         <Fade key={i} top duration={dur}>
-                            <Menu.Item className='top-nav-link' name={name} onClick={() => scrollToContent(id)} />
+                            <Menu.Item className='top-nav-link'>
+                                <span className='top-nav-link-text' onClick={() => scrollToContent(id)}>{name}</span>
+                            </Menu.Item>
                         </Fade>
                     ) 
                 })}
@@ -69,7 +69,7 @@ class TopNav extends Component {
         const downloadButtonContainer = !invertNav && (
             <Menu.Menu className='menu-item-container' position='right'>
                 <Menu.Item className='download-container'>
-                    <Button className='resume-button' content='Resume' secondary compact onClick={this.downloadResume} />
+                    <Button className='resume-button' content='Resume' color={isInverted ? 'blue' : null} secondary={!isInverted} compact onClick={this.downloadResume} />
                 </Menu.Item>
             </Menu.Menu>
         );

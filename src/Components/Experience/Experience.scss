@@ -1,9 +1,25 @@
+@import '../index.scss';
+
 .ui.header.experience-header {
     color: #757680;
 }
 
-.timeline-container {
+.experience-row-inverted .ui.header.experience-header {
+    color: $main-orange-dark;
+}
+
+.timeline-container,
+.timeline-container-mobile {
     padding-top: 3em;
+}
+
+.timeline-container-mobile .ui.grey.card {
+    margin: -5px 0 15px 0;
+}
+
+.timeline-container .ui.grey.card {
+    margin-top: 10px;
+    scale: 1.1;
 }
 
 .Timeline-line {
@@ -11,21 +27,24 @@
     top: auto;
 }
 
+.timeline-container .ui.grey.card .ui.label {
+    font-size: 1em;
+}
+
 $timelineCurrentColor: #252525;
-$timelineCurrentShadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 $timelineCurrentColor, 0 3px 3px 0 #d4d4d5;
-
 $timelineMiddleColor: #757575;
-$timelineMiddleShadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 $timelineMiddleColor, 0 3px 3px 0 #d4d4d5;
+$timelineStartColor: #cccccc;
 
-$timelineStartColor: #e1e1e1;
-$timelineStartShadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 $timelineStartColor, 0 3px 3px 0 #d4d4d5;
+@mixin timelineShadow($color) {
+    box-shadow: 0 0 0 .5px #d4d4d5, 0 2px 0 0 $color, 0 3px 3px 0 #d4d4d5;
+}
 
     .timeline-present i.inverted.circular.icon {
         background-color: $timelineCurrentColor !important;
     }
 
     .timeline-present .ui.grey.card {
-        box-shadow: $timelineCurrentShadow !important;
+        @include timelineShadow($color: $timelineCurrentColor);
     }
 
     .timeline-middle i.inverted.circular.icon {
@@ -33,7 +52,7 @@ $timelineStartShadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 $timelineStartColor, 0 3px 3p
     }
 
     .timeline-middle .ui.grey.card {
-        box-shadow: $timelineMiddleShadow !important;
+        @include timelineShadow($color: $timelineMiddleColor);
     }
 
     .timeline-start i.inverted.circular.icon {
@@ -41,5 +60,36 @@ $timelineStartShadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 $timelineStartColor, 0 3px 3p
     }
 
     .timeline-start .ui.grey.card {
-        box-shadow: $timelineStartShadow !important;
+        @include timelineShadow($color: $timelineStartColor);
+    }
+
+    .experience-row-inverted .timeline-present i.inverted.circular.icon,
+    .experience-row-inverted .timeline-present .ui.grey.card .ui.label {
+        background-color: $main-blue-dark !important;
+    }
+
+    .experience-row-inverted .timeline-present .ui.grey.card {
+        @include timelineShadow($color: $main-blue-dark)
+    }
+
+    .experience-row-inverted .timeline-middle i.inverted.circular.icon,
+    .experience-row-inverted .timeline-middle .ui.grey.card .ui.label {
+        background-color: $main-orange-light !important;
+    }
+
+    .experience-row-inverted .timeline-middle .ui.grey.card {
+        @include timelineShadow($color: $main-orange-light);
+    }
+
+    .experience-row-inverted .timeline-start i.inverted.circular.icon,
+    .experience-row-inverted .timeline-start .ui.grey.card .ui.label {
+        background-color: $main-blue-light !important;
+    }
+
+    .experience-row-inverted .timeline-start .ui.grey.card {
+        @include timelineShadow($color: $main-blue-light);
+    }
+    
+    .experience-row-inverted .ui.grey.card .ui.label {
+        color: #fff;
     }

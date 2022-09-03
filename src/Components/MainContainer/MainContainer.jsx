@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Checkbox } from 'semantic-ui-react';
 
-import TopNav from '../TopNav/TopNav';
 import Intro from '../Intro/Intro';
 import Skills from '../Skills/Skills';
 import Experience from '../Experience/Experience';
@@ -14,6 +13,7 @@ class MainContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+			isInverted: false,
 			isMobile: null
         }
     }
@@ -46,18 +46,18 @@ class MainContainer extends Component {
 	}
 
     render() {
-		const {isMobile} = this.state;
+		const {isInverted, isMobile} = this.state;
 
 		let contentContainers = [
 			{
-				content: <Intro isMobile={isMobile} scrollToContent={this.scrollToContent}/>, 
+				content: <Intro isInverted={isInverted} isMobile={isMobile} scrollToContent={this.scrollToContent} scrollToTop={this.scrollToTop} />, 
 				contentId: null, 
-				contentClass: null
+				contentClass: 'intro-main-container'
 			},
 			{
-				content: <Skills isMobile={isMobile} />,
+				content: <Skills isInverted={isInverted} isMobile={isMobile} />,
 				contentId: 'skills-content', 
-				contentClass: 'skills-row reduced-height-row'
+				contentClass: 'skills-row'
 			},
 			{
 				content: <Experience isMobile={isMobile} />, 
@@ -67,24 +67,25 @@ class MainContainer extends Component {
 			{
 				content: <Education isMobile={isMobile} />,
 				contentId: 'education-content', 
-				contentClass: 'education-row reduced-height-row'
+				contentClass: 'education-row'
 			}
 		];
 
         return (
 			<div id='app'>
-				<TopNav isMobile={isMobile} scrollToTop={this.scrollToTop} scrollToContent={this.scrollToContent} />
 				<Grid>
 					{contentContainers.map((container, i) => {
 						const {content, contentId, contentClass} = container;
+						let c = contentClass === 'intro-main-container' ? contentClass : `sub-row ${contentClass}`;
 						return (
-							<Grid.Row key={i} id={contentId} className={contentClass ? `sub-row ${contentClass}` : null} centered>
+							<Grid.Row key={i} id={contentId} className={`${c}${isInverted ? '-inverted' : ''}`} centered>
 								{content}
 							</Grid.Row>
 						)
 					})}
 				</Grid>
-				<BottomNav scrollToTop={this.scrollToTop} />
+				<BottomNav isInverted={isInverted} scrollToTop={this.scrollToTop} />
+				<Checkbox className='color-slider' toggle onClick={() => this.setState({ isInverted: !this.state.isInverted })} />
 			</div>
         );
     }
