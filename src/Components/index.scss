@@ -18,6 +18,6 @@ $main-orange-light: lighten($main-orange-dark, 7.5%);
 
 %invisible-segment {
     background: transparent;
-    border: none;
+    border: 1px solid transparent;
     box-shadow: none;
 }
