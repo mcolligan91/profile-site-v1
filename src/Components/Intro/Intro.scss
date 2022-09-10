@@ -29,7 +29,8 @@
     margin-top: 30px;
 }
 
-.intro-main-container-inverted .intro-sub-text {
+.intro-main-container-inverted .intro-sub-text,
+.intro-main-container-inverted .intro-sub-text-mobile {
     color: $main-orange-dark;
 }
 
@@ -37,3 +38,4 @@
 .intro-main-container-inverted .ui.inverted.button:focus {
     color: $main-blue-dark;
 }
+
