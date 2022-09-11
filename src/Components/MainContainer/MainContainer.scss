@@ -1,5 +1,9 @@
 @import '../index.scss';
 
+.ui.grid.content-rows-container {
+    margin: 0;
+}
+
 .intro-main-container {
     background: rgb(0, 0, 1);
     background: linear-gradient(106deg, rgba(0, 0, 1, 1) 40%, rgba(42, 42, 42, 0.75) 100%);

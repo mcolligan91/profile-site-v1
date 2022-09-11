@@ -27,10 +27,6 @@
     font-size: 2.25em;
 }
 
-.ui.grid>.column:not(.row).scroll-up-botton-container {
-    padding-bottom: 4em;
-}
-
 .bottom-nav-container-inverted .ui.header.footer-header {
     color: $main-blue-dark;
 }
@@ -42,4 +38,10 @@
 .bottom-nav-container-inverted .email-link,
 .bottom-nav-container-inverted .copyright-text {
     color: $main-blue-light;
+}
+
+@media screen and (min-width: 795px) {
+    .ui.grid>.column:not(.row).scroll-up-botton-container {
+        padding-bottom: 4em;
+    }
 }

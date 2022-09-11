@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Grid, Header, Segment } from 'semantic-ui-react';
 import { Flip } from 'react-reveal';
+import { connect } from 'react-redux';
 
 import './Skills.scss';
 
@@ -95,4 +96,11 @@ const Skills = (props) => {
 	);
 }
 
-export default Skills;
+const mapStateToProps = (state) => {
+    return {
+        isInverted: state.IsInvertedReducer.isInverted,
+		isMobile: state.IsMobileReducer.isMobile
+    }
+}
+
+export default connect(mapStateToProps)(Skills);

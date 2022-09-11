@@ -1,11 +1,12 @@
 import React from 'react';
 import { Grid, Icon, List, Header, Container, Button } from 'semantic-ui-react';
 import Fade from 'react-reveal/Fade';
+import { connect } from 'react-redux';
 
 import './BottomNav.scss';
 
 const BottomNav = (props) => {
-	const {isInverted, scrollToTop} = props;
+	const {isInverted, isMobile, scrollToTop, isSnapSet} = props;
 
 	const contactIcons = [
 		{link: 'https://github.com/mcolligan91', icon: 'devicon-github-original'},
@@ -59,7 +60,7 @@ const BottomNav = (props) => {
 	);
 
 	const scrollToTopButton = (
-		<Fade bottom>
+		<Fade bottom distance={isMobile ? '10%' : '100%'}>
 			<Button circular icon size='huge' color={isInverted ? 'blue' : 'black'} onClick={scrollToTop}>
 				<Icon name='arrow up' />
 			</Button>
@@ -83,7 +84,7 @@ const BottomNav = (props) => {
 
 	return (
 		<>
-			<Grid className={`bottom-nav-container${isInverted ? '-inverted' : ''}`} textAlign='center' stackable>
+			<Grid className={`bottom-nav-container${isInverted ? '-inverted' : ''} ${isSnapSet ? 'content-container' : ''}`} textAlign='center' stackable>
 				{footerGridColumns.map((col, i) => {
 					const {content, columnClass} = col;
 					return (
@@ -97,4 +98,11 @@ const BottomNav = (props) => {
 	);
 }
 
-export default BottomNav;
+const mapStateToProps = (state) => {
+    return {
+        isInverted: state.IsInvertedReducer.isInverted,
+		isMobile: state.IsMobileReducer.isMobile
+    }
+}
+
+export default connect(mapStateToProps)(BottomNav);

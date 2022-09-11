@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Button } from 'semantic-ui-react';
 import { Fade } from 'react-reveal';
+import { connect } from 'react-redux';
 
 import './TopNav.scss';
 
@@ -8,7 +9,7 @@ class TopNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            invertNav: true
+            hideNavBackground: true
         }
     }
 
@@ -17,7 +18,7 @@ class TopNav extends Component {
     }
 
     handleScroll = () => {
-        this.setState({ invertNav: window.pageYOffset === 0 ? true : false });
+        this.setState({ hideNavBackground: window.pageYOffset === 0 ? true : false });
     }
 
     downloadResume = () => {
@@ -25,18 +26,18 @@ class TopNav extends Component {
 	}
 
     setMenuClass = () => {
-        const {invertNav} = this.state,
+        const {hideNavBackground} = this.state,
             {isMobile} = this.props;
 
         if (isMobile) {
-            return invertNav ? 'top-nav top-nav-mobile' : 'top-nav floating-nav top-nav-mobile';
+            return hideNavBackground ? 'top-nav top-nav-mobile' : 'top-nav floating-nav top-nav-mobile';
         } else {
-            return invertNav ? 'top-nav' : 'top-nav floating-nav';
+            return hideNavBackground ? 'top-nav' : 'top-nav floating-nav';
         }
     }
 
     render() {
-        const {invertNav} = this.state,
+        const {hideNavBackground} = this.state,
             {isInverted, isMobile, scrollToTop, scrollToContent} = this.props;
 
         const mainLogoContainer = (
@@ -66,7 +67,7 @@ class TopNav extends Component {
             </Menu.Menu>
         );
 
-        const downloadButtonContainer = !invertNav && (
+        const downloadButtonContainer = !hideNavBackground && (
             <Menu.Menu className='menu-item-container' position='right'>
                 <Menu.Item className='download-container'>
                     <Button className='resume-button' content='Resume' color={isInverted ? 'blue' : null} secondary={!isInverted} compact onClick={this.downloadResume} />
@@ -76,7 +77,7 @@ class TopNav extends Component {
 
         return (
             
-                <Menu className={this.setMenuClass()} size='massive' borderless fixed='top' inverted={invertNav}>
+                <Menu className={this.setMenuClass()} size='massive' borderless fixed='top' inverted={hideNavBackground}>
                     {mainLogoContainer}
                     {menuItemContainer}
                     {!isMobile && downloadButtonContainer}
@@ -86,4 +87,11 @@ class TopNav extends Component {
     }
 }
 
-export default TopNav;
+const mapStateToProps = (state) => {
+    return {
+        isInverted: state.IsInvertedReducer.isInverted,
+        isMobile: state.IsMobileReducer.isMobile
+    } 
+}
+
+export default connect(mapStateToProps)(TopNav);

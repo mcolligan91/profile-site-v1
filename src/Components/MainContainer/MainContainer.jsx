@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Checkbox } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 import Intro from '../Intro/Intro';
 import Skills from '../Skills/Skills';
@@ -13,27 +14,24 @@ class MainContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-			isInverted: false,
-			isMobile: null
+			isSnapSet: false
         }
     }
 
     componentDidMount = () => {
-        window.scrollTo(0, 0);    
 		window.addEventListener('resize', this.resize);
 		this.resize();
+		setTimeout(() => {
+			this.setState({ isSnapSet: true });
+		}, 1000);
 	}
 
 	resize = () => {
-		const {isMobile} = this.state;
-		let currentIsMobileState = (window.innerWidth <= 795);
-		if (currentIsMobileState !== isMobile) {
-			this.setState({ isMobile: currentIsMobileState });
-		}
+		this.props.resize();
 	}
 
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.resize);
+	handleUpdateIsInverted = () => {
+		this.props.handleUpdateIsInverted();
 	}
 
 	scrollToContent = (elemId) => {
@@ -46,26 +44,27 @@ class MainContainer extends Component {
 	}
 
     render() {
-		const {isInverted, isMobile} = this.state;
+		const {isSnapSet} = this.state,
+			{isInverted} = this.props;
 
 		let contentContainers = [
 			{
-				content: <Intro isInverted={isInverted} isMobile={isMobile} scrollToContent={this.scrollToContent} scrollToTop={this.scrollToTop} />, 
+				content: <Intro scrollToContent={this.scrollToContent} scrollToTop={this.scrollToTop} />, 
 				contentId: null, 
 				contentClass: 'intro-main-container'
 			},
 			{
-				content: <Skills isInverted={isInverted} isMobile={isMobile} />,
+				content: <Skills />,
 				contentId: 'skills-content', 
 				contentClass: 'skills-row'
 			},
 			{
-				content: <Experience isMobile={isMobile} />, 
+				content: <Experience />, 
 				contentId: 'experience-content', 
 				contentClass: 'experience-row'
 			},
 			{
-				content: <Education isMobile={isMobile} />,
+				content: <Education />,
 				contentId: 'education-content', 
 				contentClass: 'education-row'
 			}
@@ -73,22 +72,39 @@ class MainContainer extends Component {
 
         return (
 			<div id='app'>
-				<Grid>
+				<Grid className='content-rows-container'>
 					{contentContainers.map((container, i) => {
 						const {content, contentId, contentClass} = container;
 						let c = contentClass === 'intro-main-container' ? contentClass : `sub-row ${contentClass}`;
 						return (
-							<Grid.Row key={i} id={contentId} className={`${c}${isInverted ? '-inverted' : ''}`} centered>
+							<Grid.Row key={i} id={contentId} className={`${c}${isInverted ? '-inverted' : ''} ${isSnapSet ? 'content-container' : ''}`} centered>
 								{content}
 							</Grid.Row>
 						)
 					})}
 				</Grid>
-				<BottomNav isInverted={isInverted} scrollToTop={this.scrollToTop} />
-				<Checkbox className='color-slider' toggle onClick={() => this.setState({ isInverted: !this.state.isInverted })} />
+				<BottomNav isSnapSet={isSnapSet} scrollToTop={this.scrollToTop} />
+				<Checkbox className='color-slider' toggle onClick={this.handleUpdateIsInverted} />
 			</div>
         );
     }
 }
 
-export default MainContainer;
+const mapStateToProps = (state) => {
+    return {
+        isInverted: state.IsInvertedReducer.isInverted
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		handleUpdateIsInverted: () => {
+			dispatch({ type: 'UPDATE_ISINVERTED' })
+		},
+		resize: () => {
+			dispatch({ type: 'UPDATE_ISMOBILE' })
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

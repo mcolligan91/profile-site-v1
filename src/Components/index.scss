@@ -4,12 +4,12 @@ $main-orange-dark: #f48600;
 $main-orange-light: lighten($main-orange-dark, 7.5%);
 
 .ui.blue.button {
-  background-color: $main-blue-dark;
+    background-color: $main-blue-dark;
 }
 
 .ui.blue.button:hover,
 .ui.blue.button:focus {
-  background-color: darken($main-blue-dark, 5%);
+  	background-color: darken($main-blue-dark, 5%);
 }
 
 .ui.blue.button:active {
@@ -21,3 +21,21 @@ $main-orange-light: lighten($main-orange-dark, 7.5%);
     border: 1px solid transparent;
     box-shadow: none;
 }
+
+@media screen and (min-width: 795px) {
+	html {
+		scroll-snap-type: y mandatory;
+	}
+	
+	body {
+		overscroll-behavior-y: none;
+	}
+	
+	.content-container {
+	  scroll-snap-align: start;
+	  scroll-snap-stop: always;
+	}
+}
+
+
+

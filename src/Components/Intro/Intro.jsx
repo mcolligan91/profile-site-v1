@@ -1,13 +1,14 @@
 import React from 'react';
 import { Container, Header, Button, Icon } from 'semantic-ui-react';
 import { Bounce } from 'react-reveal';
+import { connect } from 'react-redux';
 
 import TopNav from '../TopNav/TopNav';
 
 import './Intro.scss';
 
 const Intro = (props) => {
-	const {isInverted, isMobile, scrollToContent, scrollToTop} = props;
+	const {isMobile, scrollToContent, scrollToTop} = props;
 
 	let introHeaders = [
 		{ 
@@ -26,7 +27,7 @@ const Intro = (props) => {
 
 	return (
 		<>
-			<TopNav isInverted={isInverted} isMobile={isMobile} scrollToTop={scrollToTop} scrollToContent={scrollToContent} />
+			<TopNav scrollToTop={scrollToTop} scrollToContent={scrollToContent} />
 			<Container className='intro-container' text textAlign='center'>
 				{introHeaders.map((header, i) => {
 					const {divType, headerClass, spanClass, text} = header;
@@ -46,4 +47,10 @@ const Intro = (props) => {
 	);
 }
 
-export default Intro;
+const mapStateToProps = (state) => {
+    return {
+        isMobile: state.IsMobileReducer.isMobile
+    }
+}
+
+export default connect(mapStateToProps)(Intro);

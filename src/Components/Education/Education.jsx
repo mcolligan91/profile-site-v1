@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Grid, Header, Divider, Segment } from 'semantic-ui-react';
 import { Fade } from 'react-reveal';
+import { connect } from 'react-redux';
 
 import './Education.scss';
 
@@ -10,7 +11,7 @@ const Education = (props) => {
     let gridColumns = [
         {
             columnProps: {textAlign: isMobile ? 'center' : 'right'}, 
-            revealProps: {left: true},
+            revealProps: {left: isMobile ? false: true},
             headerText: [
                 {spanClass: 'sub-header-highlighted college-text', content: 'University of Florida'},
                 {spanClass: null, content: 'Gainesville, FL'},
@@ -19,7 +20,7 @@ const Education = (props) => {
         },
         {
             columnProps: {textAlign: isMobile ? 'center' : 'left'}, 
-            revealProps: {right: true},
+            revealProps: {right: isMobile ? false : true},
             headerText: [
                 {spanClass: 'sub-header-highlighted', content: 'Bachelor of Science in'},
                 {spanClass: 'sub-header-highlighted', content: 'Sustainability and the Built Environment'},
@@ -62,4 +63,10 @@ const Education = (props) => {
     );
 }
 
-export default Education;
+const mapStateToProps = (state) => {
+    return {
+		isMobile: state.IsMobileReducer.isMobile
+    }
+}
+
+export default connect(mapStateToProps)(Education);

@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Header } from 'semantic-ui-react';
 import Timeline from 'react-timeline-semantic-ui';
 import { Fade } from 'react-reveal';
+import { connect } from 'react-redux';
 
 import './Experience.scss';
 
@@ -53,4 +54,10 @@ const Experience = (props) => {
 	);
 }
 
-export default Experience;
+const mapStateToProps = (state) => {
+    return {
+		isMobile: state.IsMobileReducer.isMobile
+    }
+}
+
+export default connect(mapStateToProps)(Experience);
