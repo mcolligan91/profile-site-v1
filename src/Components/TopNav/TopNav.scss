@@ -51,50 +51,119 @@
     padding: 15px;
 }
 
+.ui.menu .active.item.top-nav-link,
+.ui.menu .active.item.top-nav-link:hover {
+    background: transparent;
+    pointer-events: none;
+}
+
+.top-nav-link-text {
+    display: block;
+    position: relative;
+    padding: .45em 0;
+}
+
+@mixin top-nav-underline {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.15em;
+    background-color: #fff;
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+}
+
+    %top-nav-underline {
+        @include top-nav-underline;
+    }
+
+@mixin top-nav-underline-translate {
+    opacity: 1;
+    transform: translate3d(0, 0.25em, 0);
+}
+
+    %top-nav-underline-translate {
+        @include top-nav-underline-translate;
+    }
+
+@mixin top-nav-underline-effect {
+    opacity: 1;
+    transform: scale(0);
+    transform-origin: center;
+}
+
+    %top-nav-underline-effect {
+        @include top-nav-underline-effect;
+    }
+
+@mixin top-nav-underline-visibility {
+    transform: scale(1);
+}
+
+    %top-nav-underline-visibility {
+        @include top-nav-underline-visibility;
+    }
+
+@mixin top-nav-underline-scale {
+    cursor: pointer;
+    transform: scale(1.15);
+    transition: transform .4s ease;
+}
+
+    %top-nav-underline-scale {
+        @include top-nav-underline-scale;
+    }
+
+.active .top-nav-link-text::after {
+    @extend %top-nav-underline;
+}
+
+.active .top-nav-link-text::after,
+.active .top-nav-link-text:focus::after {
+    @extend %top-nav-underline-translate;
+}
+
+.active .top-nav-link-text::after {
+    @extend %top-nav-underline-effect;
+}
+
+.active .top-nav-link-text::after,
+.active .top-nav-link-text:focus::after{
+    @extend %top-nav-underline-visibility;
+}
+
+.active .top-nav-link-text {
+    @extend %top-nav-underline-scale;
+
+}
+
 @media screen and (min-width: 795px) {
     .main-logo-container {
         margin-left: 15px;
     }
-
-    .top-nav-link-text {
-        display: block;
-        position: relative;
-        padding: .45em 0;
-    }
     
     .top-nav-link-text::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0.15em;
-        background-color: #fff;
-        opacity: 0;
-        transition: opacity .3s, transform .3s;
+        @include top-nav-underline;
     }
 
     .top-nav-link-text:hover::after,
     .top-nav-link-text:focus::after {
-        opacity: 1;
-        transform: translate3d(0, 0.25em, 0);
+        @include top-nav-underline-translate;
     }
 
     .top-nav-link-text::after {
-        opacity: 1;
-        transform: scale(0);
-        transform-origin: center;
+        @include top-nav-underline-effect;
     }
 
     .top-nav-link-text:hover::after,
     .top-nav-link-text:focus::after{
-        transform: scale(1);
+        @include top-nav-underline-visibility;
     }
 
     .top-nav-link-text:hover {
-        cursor: pointer;
-        transform: scale(1.15);
-        transition: transform .4s ease;
+        @include top-nav-underline-scale;
     }
 }
 

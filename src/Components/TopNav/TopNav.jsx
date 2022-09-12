@@ -38,7 +38,7 @@ class TopNav extends Component {
 
     render() {
         const {hideNavBackground} = this.state,
-            {isInverted, isMobile, scrollToTop, scrollToContent} = this.props;
+            {visibleContent,isInverted, isMobile, scrollToTop, scrollToContent} = this.props;
 
         const mainLogoContainer = (
             <div className='main-logo-container'>
@@ -57,8 +57,8 @@ class TopNav extends Component {
                 {menuItems.map((item, i) => {
                     const {name, id, dur} = item;
                     return (
-                        <Fade key={i} top duration={dur}>
-                            <Menu.Item className='top-nav-link'>
+                        <Fade key={i} top duration={dur} spy={isInverted} appear>
+                            <Menu.Item className='top-nav-link' active={visibleContent === name}>
                                 <span className='top-nav-link-text' onClick={() => scrollToContent(id)}>{name}</span>
                             </Menu.Item>
                         </Fade>
@@ -90,7 +90,9 @@ class TopNav extends Component {
 const mapStateToProps = (state) => {
     return {
         isInverted: state.IsInvertedReducer.isInverted,
-        isMobile: state.IsMobileReducer.isMobile
+        isMobile: state.IsMobileReducer.isMobile,
+        visibleContent: state.VisibleContentReducer.visibleContent
+
     } 
 }
 

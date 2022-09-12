@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import './Education.scss';
 
 const Education = (props) => {
-    const {isMobile} = props;
+    const {isMobile, isInverted} = props;
 
     let gridColumns = [
         {
@@ -39,7 +39,7 @@ const Education = (props) => {
                             const {columnProps, revealProps, headerText} = col;
                             return (
                                 <Grid.Column key={i} {...columnProps} computer={8} tablet={8} mobile={16}>
-                                    <Fade {...revealProps}>
+                                    <Fade {...revealProps} spy={isInverted} appear>
                                         <Header className='header-label' as='h2'>
                                             {headerText.map((row, j) => {
                                                 const {spanClass, content} = row;
@@ -65,7 +65,8 @@ const Education = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-		isMobile: state.IsMobileReducer.isMobile
+		isMobile: state.IsMobileReducer.isMobile,
+        isInverted: state.IsInvertedReducer.isInverted
     }
 }
 

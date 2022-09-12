@@ -1,4 +1,4 @@
-const initState = { isMobile: null }
+const initState = { isMobile: null };
 
 const IsMobileReducer = (state = initState, action) => {
     if (action.type === 'UPDATE_ISMOBILE') {

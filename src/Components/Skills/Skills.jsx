@@ -56,12 +56,11 @@ const Skills = (props) => {
 			<Grid className='skills-icons-grid'>
 				{skillsColumns.map((col, i) => {
 					const {group, icon, text} = col;
-					let iconClass = `devicon-${icon}`;
 					return (
 						<Grid.Column key={i} className={`skills-icon-${group}`} computer={2} tablet={2} mobile={4}>
-							<Flip top duration={!isMobile ? 1750 : 1000}>
+							<Flip top duration={!isMobile ? 1750 : 500} spy={isInverted} appear>
 								<Grid.Row>
-									<i className={`${iconClass} skills-icon`}></i>
+									<i className={`devicon-${icon} skills-icon`}></i>
 								</Grid.Row>
 								<Grid.Row className='icon-label-row'>
 									<span>{text}</span>

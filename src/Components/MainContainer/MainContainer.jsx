@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Checkbox } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { InView } from 'react-intersection-observer';
 
 import Intro from '../Intro/Intro';
 import Skills from '../Skills/Skills';
@@ -15,23 +16,16 @@ class MainContainer extends Component {
         super(props);
         this.state = {
 			isSnapSet: false
-        }
+		}
     }
 
     componentDidMount = () => {
-		window.addEventListener('resize', this.resize);
-		this.resize();
+		const {resize} = this.props;
+		window.addEventListener('resize', resize);
+		resize();
 		setTimeout(() => {
 			this.setState({ isSnapSet: true });
 		}, 1000);
-	}
-
-	resize = () => {
-		this.props.resize();
-	}
-
-	handleUpdateIsInverted = () => {
-		this.props.handleUpdateIsInverted();
 	}
 
 	scrollToContent = (elemId) => {
@@ -45,28 +39,36 @@ class MainContainer extends Component {
 
     render() {
 		const {isSnapSet} = this.state,
-			{isInverted} = this.props;
+			{isInverted, isMobile, handleUpdateVisibleContent} = this.props;
 
 		let contentContainers = [
 			{
 				content: <Intro scrollToContent={this.scrollToContent} scrollToTop={this.scrollToTop} />, 
 				contentId: null, 
-				contentClass: 'intro-main-container'
+				contentClass: 'intro-main-container',
+				contentName: 'Intro',
+				visibilityThreshold: .75
 			},
 			{
 				content: <Skills />,
 				contentId: 'skills-content', 
-				contentClass: 'skills-row'
+				contentClass: 'skills-row',
+				contentName: isMobile ? 'Skills' : 'Technical Skills',
+				visibilityThreshold: .25
 			},
 			{
 				content: <Experience />, 
 				contentId: 'experience-content', 
-				contentClass: 'experience-row'
+				contentClass: 'experience-row',
+				contentName: 'Experience',
+				visibilityThreshold: .25
 			},
 			{
 				content: <Education />,
 				contentId: 'education-content', 
-				contentClass: 'education-row'
+				contentClass: 'education-row',
+				contentName: 'Education',
+				visibilityThreshold: .25
 			}
 		];
 
@@ -74,17 +76,19 @@ class MainContainer extends Component {
 			<div id='app'>
 				<Grid className='content-rows-container'>
 					{contentContainers.map((container, i) => {
-						const {content, contentId, contentClass} = container;
+						const {content, contentId, contentClass, contentName, visibilityThreshold} = container;
 						let c = contentClass === 'intro-main-container' ? contentClass : `sub-row ${contentClass}`;
 						return (
 							<Grid.Row key={i} id={contentId} className={`${c}${isInverted ? '-inverted' : ''} ${isSnapSet ? 'content-container' : ''}`} centered>
-								{content}
+								<InView threshold={visibilityThreshold} onChange={(inView) => inView && handleUpdateVisibleContent(contentName)}>
+									{content}									
+								</InView>
 							</Grid.Row>
 						)
 					})}
 				</Grid>
 				<BottomNav isSnapSet={isSnapSet} scrollToTop={this.scrollToTop} />
-				<Checkbox className='color-slider' toggle onClick={this.handleUpdateIsInverted} />
+				<Checkbox className='color-slider' toggle onClick={() => this.props.handleUpdateIsInverted()} />
 			</div>
         );
     }
@@ -92,7 +96,8 @@ class MainContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isInverted: state.IsInvertedReducer.isInverted
+        isInverted: state.IsInvertedReducer.isInverted,
+		isMobile: state.IsMobileReducer.isMobile
 	}
 }
 
@@ -103,6 +108,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		resize: () => {
 			dispatch({ type: 'UPDATE_ISMOBILE' })
+		},
+		handleUpdateVisibleContent: (content) => {
+			dispatch({ type: 'UPDATE_VISIBLECONTENT', content: content })
 		}
 	}
 }

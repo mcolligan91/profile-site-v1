@@ -60,7 +60,7 @@ const BottomNav = (props) => {
 	);
 
 	const scrollToTopButton = (
-		<Fade bottom distance={isMobile ? '10%' : '100%'}>
+		<Fade bottom distance={isMobile ? '10%' : '100%'} spy={isInverted} appear>
 			<Button circular icon size='huge' color={isInverted ? 'blue' : 'black'} onClick={scrollToTop}>
 				<Icon name='arrow up' />
 			</Button>

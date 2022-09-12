@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import './Experience.scss';
 
 const Experience = (props) => {
-	const {isMobile} = props;
+	const {isMobile, isInverted} = props;
 
 	let timelineCards = [
 		{
@@ -43,7 +43,7 @@ const Experience = (props) => {
 					const {containerClass, title, time} = card;
 					return (
 						<div key={i} className={containerClass}>
-							<Fade bottom duration={1250}>
+							<Fade bottom duration={1250} spy={isInverted} appear>
 								<Timeline direction={isMobile ? 'right' : i % 2 === 0 ? 'left' : 'right'} title={title} time={time} description={timelineDescription} tags={[]} lineHeight={1} />
 							</Fade>
 						</div>
@@ -56,7 +56,8 @@ const Experience = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-		isMobile: state.IsMobileReducer.isMobile
+		isMobile: state.IsMobileReducer.isMobile,
+        isInverted: state.IsInvertedReducer.isInverted
     }
 }
 
