@@ -108,7 +108,7 @@
 
 @mixin top-nav-underline-scale {
     cursor: pointer;
-    transform: scale(1.15);
+    transform: scale(1.15) translateY(-2px);
     transition: transform .4s ease;
 }
 
@@ -168,6 +168,10 @@
 }
 
 @media screen and (max-width: 795px) {
+    .main-logo-container {
+        padding: 15px 5px 15px 15px;
+    }
+
     .top-nav-link:hover {
         background: transparent !important;
     }
