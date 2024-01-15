@@ -44,7 +44,7 @@ const Experience = (props) => {
 					return (
 						<div key={i} className={containerClass}>
 							<Fade bottom duration={1250} spy={isInverted} appear>
-								<Timeline direction={isMobile ? 'right' : i % 2 === 0 ? 'left' : 'right'} title={title} time={time} description={timelineDescription} tags={['See More']} lineHeight={1} />
+								<Timeline direction={isMobile ? 'right' : i % 2 === 0 ? 'left' : 'right'} title={title} time={time} description={timelineDescription} tags={[]} lineHeight={1} />
 							</Fade>
 						</div>
 					)
