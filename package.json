@@ -1,7 +1,7 @@
 {
   "name": "profile-site",
   "version": "0.1.0",
-  "homepage": "https://mcolligan91.github.io/profile-site-v1",
+  "homepage": "https://mcolligan91.github.io/profile-site",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
